@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: color-config
+data:
+  COLOR: "red"  # You can replace this with any valid CSS color value

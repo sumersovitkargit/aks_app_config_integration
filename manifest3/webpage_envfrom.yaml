@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volume
+  namespace: configmap3  # Replace with your desired namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volume
+  template:
+    metadata:
+      labels:
+        app: volume
+    spec:
+      containers:
+      - name: volume
+        image: solunistresearch1605/webpage:latest
+        envFrom:
+          - configMapRef:
+              name: color-config-volume  # Injects the 'COLOR' environment variable
+        volumeMounts:
+          - name: configmap-volume
+            mountPath: /config  # Mount the ConfigMap as files (if needed)
+      volumes:
+        - name: configmap-volume
+          configMap:
+            name: color-config-volume  # Mount the ConfigMap as a volume

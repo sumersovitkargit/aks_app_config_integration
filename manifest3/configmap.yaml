@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: color-config-volume
+  namespace: configmap3  # Replace with your desired namespace
+data:
+  COLOR: "green"  # Your desired color value

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configmap-from-env
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: configmap-from-env
+  template:
+    metadata:
+      labels:
+        app: configmap-from-env
+    spec:
+      containers:
+      - name: configmap-from-env
+        image: solunistresearch1605/webpage:latest
+        
+          
+        env:
+        - name: COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: color-config
+              key: COLOR

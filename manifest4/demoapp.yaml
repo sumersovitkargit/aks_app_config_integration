@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnetapp-demo
+  labels:
+    app: aspnetapp-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aspnetapp-demo
+  template:
+    metadata:
+      labels:
+        app: aspnetapp-demo
+    spec:
+      containers:
+      - name: aspnetapp
+        image: myregistry.azurecr.io/aspnetapp:v1
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+      volumes:
+      - name: config-volume 
+        configMap: 
+          name: configmap-created-by-appconfig-provider

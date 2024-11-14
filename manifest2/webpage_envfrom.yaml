@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envfrom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: envfrom
+  template:
+    metadata:
+      labels:
+        app: envfrom
+    spec:
+      containers:
+      - name: envfrom
+        image: solunistresearch1605/webpage:latest 
+        envFrom:
+            - configMapRef:
+                name: color-config-envfrom

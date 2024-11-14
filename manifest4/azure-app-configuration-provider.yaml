@@ -1,0 +1,14 @@
+apiVersion: azconfig.io/v1
+kind: AzureAppConfigurationProvider
+metadata:
+  name: appconfigurationprovider-sample
+  namespace: configmap4  # Ensure this matches the namespace
+spec:
+  endpoint: https://appcs.azconfig.io  # Make sure this is correct
+  target:
+    configMapName: configmap-created-by-appconfig-provider
+    configMapData:
+      type: json  # Using JSON to store data from Azure App Configuration
+      key: COLOR  # This should be the key you're pulling from Azure App Configuration
+  auth:
+    managedIdentityClientId: 2c8f6bf7-69be-486f-b80e-4fc32b4722a9  # Ensure this is the correct Managed Identity client ID
