@@ -16,12 +16,12 @@ spec:
     spec:
       containers:
       - name: aspnetapp
-        image: myregistry.azurecr.io/aspnetapp:v1
+        image: solunistresearch1605/webpage:latest
         ports:
         - containerPort: 80
         volumeMounts:
         - name: config-volume
-          mountPath: /app/config
+          mountPath: /config
       volumes:
       - name: config-volume 
         configMap: 

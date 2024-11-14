@@ -1,13 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: appcs-service
-  namespace: configmap4
+  name: aspnetapp-demo-service
 spec:
-  selector:
-    app: appcs
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 80  # Expose port 80
-      targetPort: 80  # Target port for the application container
-  type: LoadBalancer  # Expose service externally using a LoadBalancer (or use ClusterIP for internal access)
+  - port: 80
+  selector:
+    app: aspnetapp-demo
