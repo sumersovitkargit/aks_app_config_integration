@@ -1,6 +1,6 @@
 ![K8s Configmap Demo](./image.png)
 
-# AKS-App Configuration Setting
+# AKS-App Configuration Integration to create the K8s Congigmaps
 
 This repository contains steps to integrate Azure App Configuration with an AKS cluster that has Azure AD authentication enabled.
 
@@ -10,27 +10,27 @@ This repository contains steps to integrate Azure App Configuration with an AKS 
   - Azure App Configuration  
   - User Managed Identity  
 
----
 
 ## Steps  
 
 ### 1. Install the Azure App Configuration Kubernetes Provider  
 
 #### Using Helm:  
-Install the Azure App Configuration Kubernetes Provider to your AKS cluster using Helm:  
-```bash  
-helm install azureappconfiguration.kubernetesprovider \
+  Install the Azure App Configuration Kubernetes Provider to your AKS cluster using Helm:  
+  ```bash  
+  helm install azureappconfiguration.kubernetesprovider \
     oci://mcr.microsoft.com/azure-app-configuration/helmchart/kubernetes-provider \
     --namespace azappconfig-system \
     --create-namespace
-
-#### azure CLI:
+ ```
+#### Using Helm:
+```bash
 az k8s-extension create --cluster-type managedClusters \
     --cluster-name myAKSCluster \
     --resource-group myResourceGroup \
     --name appconfigurationkubernetesprovider \
     --extension-type Microsoft.AppConfiguration  
-
+ ```
 # Azure App Configuration Provider Setup
 
 This guide walks you through setting up the `appConfigurationProvider.yaml` file, which allows your Kubernetes cluster to fetch data from Azure App Configuration and create a ConfigMap based on it.
@@ -64,7 +64,7 @@ spec:
     configMapName: configmap-created-by-appconfig-provider
   auth:
     managedIdentityClientId: <your-managed-identity-client-id>
-
+```
 ### Add Key-Values in Azure App Configuration
 Log in to your Azure portal and add the required key-value pairs to your Azure App Configuration instance.
 
