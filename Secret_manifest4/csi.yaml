@@ -1,0 +1,18 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: azure-kvname-color-msi
+spec:
+  provider: azure
+  parameters:
+    usePodIdentity: "false"             # Use "false" to use Managed Identity instead of Azure Pod Identity
+    clientID: f3160f4c-f65e-4d07-8c28-4fc08b36c753 # Replace with the clientID of the user-assigned managed identity
+    keyvaultName: globantdemo      # Replace with the name of your Azure Key Vault
+    cloudName: ""                       # Optional: Leave blank for AzurePublicCloud, or specify other clouds
+    objects: |
+      array:
+        - |
+          objectName: COLOR            # Name of the secret in Key Vault
+          objectType: secret           # We are fetching a secret
+          objectVersion: ""            # Optional: leave empty to access the latest version
+    tenantId: ab968060-1bea-4e12-ba68-c8579dd00e75               # Replace with the tenant ID associated with the Key Vault

@@ -7,7 +7,6 @@ spec:
   target:
     configMapName: configmap-created-by-appconfig-provider
     configMapData: 
-      type: json
-      key: mysettings.json
+      type: default
   auth:
     managedIdentityClientId: 2c8f6bf7-69be-486f-b80e-4fc32b4722a9

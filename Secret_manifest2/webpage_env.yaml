@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: envfrom-secret
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: envfrom-secret
+  template:
+    metadata:
+      labels:
+        app: envfrom-secret
+    spec:
+      containers:
+      - name: envfrom-secret
+        image: solunistresearch1605/webpage:latest 
+        envFrom:
+          - secretRef:
+              name: color-secret

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volumesecret
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volumesecret
+  template:
+    metadata:
+      labels:
+        app: volumesecret
+    spec:
+      containers:
+      - name: volumesecret
+        image: solunistresearch1605/webpage:latest
+        envFrom:
+          - secretRef:
+              name: color-secret-volume  # Injects the 'COLOR' environment variable
+        volumeMounts:
+          - name: secret-volume
+            mountPath: /secret  # Mount the Secret as files (if needed)
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: color-secret-volume  # Mount the Secret as a volume

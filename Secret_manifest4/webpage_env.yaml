@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volumecsi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: volumecsi
+  template:
+    metadata:
+      labels:
+        app: volumecsi
+      annotations:
+        secrets-store.csi.k8s.io/used: "true"  # Ensures the CSI driver is used
+    spec:
+      containers:
+      - name: volumecsi
+        image: solunistresearch1605/webpage:latest
+        env:
+        - name: COLOR
+          valueFrom:
+            secretKeyRef:
+              name: color  # Automatically populated from Key Vault via the CSI driver
+              key: COLOR         # Reference the COLOR secret key
+        volumeMounts:
+        - name: secrets-store
+          mountPath: "/mnt/secrets"  # Mount the secrets as files (optional)
+          readOnly: true
+      volumes:
+      - name: secrets-store
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: azure-kvname-color-msi  # Refers to the SecretProviderClass

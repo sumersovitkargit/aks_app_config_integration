@@ -1,28 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: aspnetapp-demo
-  labels:
-    app: aspnetapp-demo
+  name: volume
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: aspnetapp-demo
+      app: volume
   template:
     metadata:
       labels:
-        app: aspnetapp-demo
+        app: volume
     spec:
       containers:
-      - name: aspnetapp
+      - name: volume
         image: solunistresearch1605/webpage:latest
-        ports:
-        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: configmap-created-by-appconfig-provider  # Injects the 'COLOR' environment variable
         volumeMounts:
-        - name: config-volume
-          mountPath: /config
+          - name: configmap-created-by-appconfig-provider
+            mountPath: /config  # Mount the ConfigMap as files (if needed)
       volumes:
-      - name: config-volume 
-        configMap: 
-          name: configmap-created-by-appconfig-provider
+        - name: configmap-created-by-appconfig-provider
+          configMap:
+            name: configmap-created-by-appconfig-provider  # Mount the ConfigMap as a volume

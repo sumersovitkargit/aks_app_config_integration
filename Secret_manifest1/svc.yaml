@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: secret-from-env
+spec:
+  type: LoadBalancer
+  selector:
+    app: secret-from-env
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
