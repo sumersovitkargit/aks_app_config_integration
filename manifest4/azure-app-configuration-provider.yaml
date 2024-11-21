@@ -8,5 +8,8 @@ spec:
     configMapName: configmap-created-by-appconfig-provider
     configMapData: 
       type: default
+    secret:
+      target:
+        secretName: COLOR
   auth:
     managedIdentityClientId: 2c8f6bf7-69be-486f-b80e-4fc32b4722a9
