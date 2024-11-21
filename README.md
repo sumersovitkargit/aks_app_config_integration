@@ -1,4 +1,4 @@
-# AKS-App Configuration Integration to create the K8s Congigmaps
+# App Configuration and AKS integration for using configmaps and secrets in k8s
 
 This repository contains steps to integrate Azure App Configuration with an AKS cluster that has Azure AD authentication enabled.
 
